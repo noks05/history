@@ -1,0 +1,44 @@
+@use '../../styles/variables' as *;
+
+.default-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	background-color: $white;
+	cursor: pointer;
+
+	&--circle {
+		border-radius: 100%;
+	}
+
+	&--circle.default-button--small {
+		width: $button-height-small;
+	}
+
+	&--circle.default-button--medium {
+		width: $button-height-medium;
+	}
+
+	&--empty {
+		background-color: transparent;
+	}
+
+	&--small {
+		height: $button-height-small;
+	}
+
+	&--medium {
+		height: $button-height-medium;
+	}
+
+	&--shadow.default-button--blue {
+		color: $blue;
+		box-shadow: 0 0 15px 0 $blue-20;
+	}
+
+	&--outline.default-button--blueBlack {
+		color: $blue-black;
+		border: $border-blue-black;
+	}
+}

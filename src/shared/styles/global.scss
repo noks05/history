@@ -1,0 +1,62 @@
+@use 'fonts';
+@use 'reset';
+@use 'variables' as *;
+
+body {
+	width: 100%;
+	max-width: calc($app-container-width + $app-container-padding-x * 2);
+	padding-inline: $app-container-padding-x;
+	margin-inline: auto;
+	font-family: $font-family-primary;
+	font-size: 20px;
+	line-height: 140%;
+	font-weight: 400;
+	color: $blue-black;
+	background-color: $white;
+}
+
+.container {
+	width: 100%;
+	max-width: calc($container-width + $container-padding-x * 2);
+	margin-inline: auto;
+	padding-inline: $container-padding-x;
+}
+
+.title-h1 {
+	font-weight: 700;
+	font-size: 56px;
+	line-height: 120%;
+	color: $blue-black;
+}
+
+.nav-arrow-small {
+	height: 20px;
+	width: 10px;
+}
+
+.nav-arrow-medium {
+	height: 24px;
+	width: 12px;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	border: 0;
+	padding: 0;
+
+	white-space: nowrap;
+	clip-path: inset(100%);
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+}
+
+.d-none {
+	display: none;
+}
+
+.visibility-hidden {
+	visibility: hidden;
+}
