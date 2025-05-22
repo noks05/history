@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 /**
   Нормализация блочной модели
  */
@@ -83,8 +85,10 @@ button {
 	border: none;
 }
 
-button, a, svg {
-	transition-duration: var(--transition-primary);
+button,
+a,
+svg {
+	transition-duration: $transition-primary;
 }
 
 html {

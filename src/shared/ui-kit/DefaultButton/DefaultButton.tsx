@@ -7,7 +7,7 @@ interface IDefaultButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	size?: 'small' | 'medium'
 	circle?: boolean
 	typeButton?: 'shadow' | 'outline' | 'empty'
-	color?: 'blue' | 'blackBlue'
+	color?: 'blue' | 'blueBlack'
 	children: ReactNode
 }
 
@@ -16,7 +16,7 @@ export const DefaultButton: FC<IDefaultButtonProps> = ({
 	size = 'medium',
 	circle,
 	typeButton = 'outline',
-	color = 'blackBlue',
+	color = 'blueBlack',
 	children,
 	...restProps
 }) => {

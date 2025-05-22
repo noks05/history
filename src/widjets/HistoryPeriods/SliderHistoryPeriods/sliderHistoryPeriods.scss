@@ -1,7 +1,6 @@
-@use '../../shared/styles/variables' as *;
+@use '@/shared/styles/variables' as *;
 
 .slider-history {
-	border: 1px solid #000;
 
 	&__wrapper {
 		position: relative;

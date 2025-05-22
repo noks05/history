@@ -5,7 +5,7 @@ $blue-20: rgba(56, 119, 238, 0.202);
 $fuschia: #ef5da8;
 $fuschia-80: #f178b6;
 $iris: #5d5fef;
-$linear-gradient-primary: linear-gradient(90deg,
+$linear-gradient-primary: linear-gradient(180deg,
 		rgba(56, 119, 238, 1) 0%,
 		rgba(239, 93, 168, 1) 100%);
 
@@ -18,6 +18,8 @@ $container-padding-x: 20px;
 
 $button-height-medium: 56px;
 $button-height-small: 40px;
+
+$transition-primary: 200ms;
 
 $font-family-primary: 'PT Sans', sans-serif;
 $font-family-alternate: 'Bebas Neue', sans-serif;

@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import React from 'react'
 
-import { SliderHistoryPeriods } from '@/widjets/HistoryPeriods/SliderHistoryPeriods/SliderPeriodHistory'
+import { HistoryPeriods } from '@/widjets/HistoryPeriods/HistoryPeriods'
 import './app.scss'
 
 interface IAppProps {
@@ -11,7 +11,7 @@ interface IAppProps {
 export const App: FC<IAppProps> = props => {
 	return (
 		<div className='app'>
-			<SliderHistoryPeriods className='container' />
+			<HistoryPeriods />
 		</div>
 	)
 }

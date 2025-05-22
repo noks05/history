@@ -1,0 +1,22 @@
+@use '@/shared/styles/variables' as *;
+
+.switch-slide {
+	&__numbers {
+		display: block;
+		margin-bottom: 20px;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 100%;
+		color: $blue-black;
+	}
+
+	&__bottom {
+		display: flex;
+		gap: 20px;
+	}
+
+	&--hidden {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+}

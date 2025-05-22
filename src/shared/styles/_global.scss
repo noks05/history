@@ -2,6 +2,10 @@
 @use 'reset';
 @use 'variables' as *;
 
+.app {
+	min-height: 100vh;
+}
+
 body {
 	width: 100%;
 	max-width: calc($app-container-width + $app-container-padding-x * 2);
@@ -24,7 +28,7 @@ body {
 
 .title-h1 {
 	font-weight: 700;
-	font-size: 56px;
+	font-size: clamp(20px, 4vw, 56px);
 	line-height: 120%;
 	color: $blue-black;
 }
