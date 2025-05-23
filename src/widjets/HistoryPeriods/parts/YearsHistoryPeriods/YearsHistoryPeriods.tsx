@@ -34,7 +34,7 @@ export const YearsHistoryPeriods: FC<IYearsHistoryPeriodsProps> = ({
 				setTo(prev => prev + 1)
 			}
 		}
-		setTimeout(() => changeState(), 100)
+		setTimeout(() => changeState(), 10)
 
 		return () => clearTimeout(timeId)
 	}, [period, from, to])

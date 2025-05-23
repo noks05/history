@@ -1,48 +1,38 @@
 import { SwitchSlide } from '@/features/SwitchSlide'
 import type { FC } from 'react'
 import React, { useState } from 'react'
-import { SliderHistoryPeriods } from './SliderHistoryPeriods/SliderHistoryPeriods'
+import { SliderHistoryPeriods } from './parts/SliderHistoryPeriods/SliderHistoryPeriods'
 
-import { CircleHistoryPeriods } from './CircleHistoryPeriods/CircleHistoryPeriods'
 import './historyPeriods.scss'
-import { YearsHistoryPeriods } from './YearsHistoryPeriods/YearsHistoryPeriods'
+import { circleItems } from './lib/consts'
+import { CircleHistoryPeriods } from './parts/CircleHistoryPeriods/CircleHistoryPeriods'
+import { YearsHistoryPeriods } from './parts/YearsHistoryPeriods/YearsHistoryPeriods'
 
 interface IHistoryPeriodsProps {
 	className?: string
 }
 
-const circleItems = [
-	{ id: 1, title: 'Книги' },
-	{ id: 2, title: 'Литература' },
-	{ id: 3, title: 'Книги3' },
-	{ id: 4, title: 'Книги4' },
-	{ id: 5, title: 'Книги5' },
-	{ id: 6, title: 'Книги6' },
-]
-
 type TCitcleItem = { id: number; title: string }
 
 const ALL_PAGES = 6
+console.log('circleItemsWithItems =', circleItems)
 
 export const HistoryPeriods: FC<IHistoryPeriodsProps> = props => {
-	const [currentPage, setCurrentPage] = useState(1)
-	const [period, setPeriod] = useState({ from: 2015, to: 2022 })
-	const [currentData, setCurrentData] = useState<TCitcleItem>(circleItems[0])
-
-	const setStateInCircle = (id: number) => {
-		const newData = circleItems.find(el => el.id === id)
-		setCurrentData(newData || circleItems[0])
-	}
+	const [currentIndex, setCurrentIndex] = useState(0)
+	const currentPeriod = circleItems[currentIndex].period
+	console.log('period', currentIndex, circleItems, currentPeriod)
+	const currentSliderItems = circleItems[currentIndex].items
+	const currentId = circleItems[currentIndex].id
 
 	const onPrev = () => {
-		if (currentPage > 1) {
-			setCurrentPage(prev => (prev -= 1))
+		if (currentIndex > 0) {
+			setCurrentIndex(prev => (prev -= 1))
 		}
 	}
 
 	const onNext = () => {
-		if (currentPage < ALL_PAGES) {
-			setCurrentPage(prev => (prev += 1))
+		if (currentIndex < ALL_PAGES - 1) {
+			setCurrentIndex(prev => (prev += 1))
 		}
 	}
 
@@ -58,12 +48,13 @@ export const HistoryPeriods: FC<IHistoryPeriodsProps> = props => {
 				<br /> даты
 			</h1>
 			<div className='history-periods__center'>
-				<YearsHistoryPeriods period={period} />
+				<YearsHistoryPeriods period={currentPeriod} />
+
 				<div className='history-periods__circle'>
 					<CircleHistoryPeriods
 						items={circleItems}
-						idActiveItem={currentData.id}
-						setState={setStateInCircle}
+						idActiveItem={currentId}
+						setActiveIndex={setCurrentIndex}
 					/>
 				</div>
 			</div>
@@ -71,12 +62,12 @@ export const HistoryPeriods: FC<IHistoryPeriodsProps> = props => {
 			<div className='history-periods__container container'>
 				<SwitchSlide
 					className='history-periods__switch'
-					currentPage={currentPage}
+					currentPage={currentIndex + 1}
 					allPages={ALL_PAGES}
 					onPrev={onPrev}
 					onNext={onNext}
 				/>
-				<SliderHistoryPeriods />
+				<SliderHistoryPeriods data={currentSliderItems} />
 			</div>
 		</div>
 	)

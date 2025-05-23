@@ -4,8 +4,9 @@
 	position: relative;
 	min-height: 100vh;
 	max-height: 1080px;
-	padding-top: min(4vh, 170px);
+	padding-top: min(7vh, 170px);
 	padding-bottom: min(9.6vh, 104px);
+	border-inline: 1px solid $blue-black-03;
 
 	&__title {
 		position: relative;
@@ -31,15 +32,11 @@
 		height: clamp(200px, 30vh, 393px);
 	}
 
-	// &__years {
-	// 	font-size: clamp();
-	// }
-
 	&__circle {
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		height: 120%;
+		height: clamp(400px, 50vh, 530px);
 		transform: translate(-50%, -50%);
 	}
 

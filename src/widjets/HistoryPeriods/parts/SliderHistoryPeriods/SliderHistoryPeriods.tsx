@@ -7,49 +7,25 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 import 'swiper/scss'
 import 'swiper/scss/navigation'
 
-import { IconNext } from '../../../shared/images/IconNext'
-import { IconPrev } from '../../../shared/images/IconPrev'
-import { DefaultButton } from '../../../shared/ui-kit/DefaultButton/DefaultButton'
+import { IconNext } from '../../../../shared/images/IconNext'
+import { IconPrev } from '../../../../shared/images/IconPrev'
+import { DefaultButton } from '../../../../shared/ui-kit/DefaultButton/DefaultButton'
 
 import './sliderHistoryPeriods.scss'
 
 interface ISliderHistoryPeriodsProps {
 	className?: string
 	slidesPerView?: number
+	data: { title: string; description: string; id: number }[]
 }
-
-const sliderItems = [
-	{
-		id: 1,
-		title: '2015',
-		description:
-			'13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды',
-	},
-	{
-		id: 2,
-		title: '2016',
-		description:
-			'Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11',
-	},
-	{
-		id: 3,
-		title: '2017',
-		description:
-			'Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi',
-	},
-	{
-		id: 4,
-		title: '2018',
-		description:
-			'Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi',
-	},
-]
 
 export const SliderHistoryPeriods: FC<ISliderHistoryPeriodsProps> = ({
 	className,
 	slidesPerView = 3,
+	data,
 }) => {
-	const [disableNav, setDisableNav] = useState('')
+	console.log('data = ', data)
+	const [disableNav, setDisableNav] = useState('prev')
 	const swiperRef = useRef<SwiperClass>(null)
 	const onPrev = () => {
 		swiperRef.current?.slidePrev()
@@ -80,8 +56,8 @@ export const SliderHistoryPeriods: FC<ISliderHistoryPeriodsProps> = ({
 					}}
 					className='slider-history__swiper'
 				>
-					{sliderItems.map(({ id, description, title }, i) => (
-						<SwiperSlide className='slider-history__slide' key={i}>
+					{data.map(({ id, description, title }) => (
+						<SwiperSlide className='slider-history__slide' key={id}>
 							<div className='slider-history__box'>
 								<p className='slider-history__title'>{title}</p>
 								<h3 className='slider-history__description'>{description}</h3>
@@ -98,6 +74,7 @@ export const SliderHistoryPeriods: FC<ISliderHistoryPeriodsProps> = ({
 					onClick={onPrev}
 					typeButton='shadow'
 					color='blue'
+					size='small'
 					circle
 				>
 					<IconPrev className='nav-arrow-small' />
@@ -111,6 +88,7 @@ export const SliderHistoryPeriods: FC<ISliderHistoryPeriodsProps> = ({
 					onClick={onNext}
 					typeButton='shadow'
 					color='blue'
+					size='small'
 					circle
 				>
 					<IconNext className='nav-arrow-small' />

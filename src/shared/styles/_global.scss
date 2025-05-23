@@ -2,6 +2,10 @@
 @use 'reset';
 @use 'variables' as *;
 
+#root {
+	overflow: hidden;
+}
+
 .app {
 	min-height: 100vh;
 }
@@ -17,6 +21,7 @@ body {
 	font-weight: 400;
 	color: $blue-black;
 	background-color: $white;
+	overflow: hidden;
 }
 
 .container {
