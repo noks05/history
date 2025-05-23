@@ -5,11 +5,12 @@
 	align-items: center;
 	justify-content: center;
 	border: none;
+	padding: 0;
 	background-color: $white;
 	cursor: pointer;
 
 	&:hover {
-		filter: brightness(0.9)
+		filter: brightness(0.95)
 	}
 
 	&--circle {

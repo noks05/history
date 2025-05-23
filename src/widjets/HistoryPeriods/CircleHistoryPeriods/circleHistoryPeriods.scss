@@ -1,0 +1,45 @@
+@use '@/shared/styles/variables' as *;
+
+.circle-history {
+	position: relative;
+	height: 100%;
+	aspect-ratio: 1;
+	border: 1px solid $blue-black-05;
+	border-radius: 100%;
+
+	&__button {
+		position: absolute;
+		transform: scale(0.1);
+		height: $button-height-medium;
+		width: $button-height-medium;
+		background-color: $blue-black;
+		transition: transform $transition-alternate, background-color $transition-alternate;
+
+		&::before {
+			content: '';
+			position: absolute;
+			inset: -40px;
+			border-radius: 100%;
+			z-index: -1;
+		}
+
+		&--active,
+		&:hover {
+			transform: scale(1);
+			background-color: $white;
+		}
+	}
+
+	&__title {
+		position: absolute;
+		top: 50%;
+		left: 120%;
+		transform: translateY(-50%);
+		opacity: 0;
+		transition: opacity $transition-alternate,
+	}
+
+	&__button--active &__title {
+		opacity: 1;
+	}
+}

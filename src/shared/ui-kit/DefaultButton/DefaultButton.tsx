@@ -6,7 +6,7 @@ import './defaultButton.scss'
 interface IDefaultButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	size?: 'small' | 'medium'
 	circle?: boolean
-	typeButton?: 'shadow' | 'outline' | 'empty'
+	typeButton?: 'shadow' | 'outline' | 'empty' | ''
 	color?: 'blue' | 'blueBlack'
 	children: ReactNode
 }

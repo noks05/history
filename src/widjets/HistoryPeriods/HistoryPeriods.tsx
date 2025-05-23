@@ -1,6 +1,6 @@
 import { SwitchSlide } from '@/features/SwitchSlide'
 import type { FC } from 'react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { SliderHistoryPeriods } from './SliderHistoryPeriods/SliderHistoryPeriods'
 
 import { CircleHistoryPeriods } from './CircleHistoryPeriods/CircleHistoryPeriods'
@@ -11,11 +11,28 @@ interface IHistoryPeriodsProps {
 	className?: string
 }
 
+const circleItems = [
+	{ id: 1, title: 'Книги' },
+	{ id: 2, title: 'Литература' },
+	{ id: 3, title: 'Книги3' },
+	{ id: 4, title: 'Книги4' },
+	{ id: 5, title: 'Книги5' },
+	{ id: 6, title: 'Книги6' },
+]
+
+type TCitcleItem = { id: number; title: string }
+
 const ALL_PAGES = 6
 
 export const HistoryPeriods: FC<IHistoryPeriodsProps> = props => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const [period, setPeriod] = useState({ from: 2015, to: 2022 })
+	const [currentData, setCurrentData] = useState<TCitcleItem>(circleItems[0])
+
+	const setStateInCircle = (id: number) => {
+		const newData = circleItems.find(el => el.id === id)
+		setCurrentData(newData || circleItems[0])
+	}
 
 	const onPrev = () => {
 		if (currentPage > 1) {
@@ -29,10 +46,10 @@ export const HistoryPeriods: FC<IHistoryPeriodsProps> = props => {
 		}
 	}
 
-	useEffect(() => {
-		setTimeout(() => setPeriod({ from: 2000, to: 2050 }), 2000)
-		return () => {}
-	}, [])
+	// useEffect(() => {
+	// 	setTimeout(() => setPeriod({ from: 2000, to: 2050 }), 2000)
+	// 	return () => {}
+	// }, [])
 
 	return (
 		<div className='history-periods'>
@@ -42,7 +59,13 @@ export const HistoryPeriods: FC<IHistoryPeriodsProps> = props => {
 			</h1>
 			<div className='history-periods__center'>
 				<YearsHistoryPeriods period={period} />
-				<CircleHistoryPeriods className='history-periods__circle' />
+				<div className='history-periods__circle'>
+					<CircleHistoryPeriods
+						items={circleItems}
+						idActiveItem={currentData.id}
+						setState={setStateInCircle}
+					/>
+				</div>
 			</div>
 
 			<div className='history-periods__container container'>
