@@ -16,3 +16,23 @@
 		color: $fuschia;
 	}
 }
+
+@media (max-width: 767px) {
+	.years-history {
+		&__from {
+			color: $blue;
+		}
+
+		&__to {
+			color: $fuschia-80;
+		}
+	}
+}
+
+@media (max-width: 575px) {
+	.years-history {
+		width: 100%;
+		gap: 0;
+		justify-content: space-between;
+	}
+}

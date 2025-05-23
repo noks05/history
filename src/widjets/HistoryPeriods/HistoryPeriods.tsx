@@ -36,30 +36,25 @@ export const HistoryPeriods: FC<IHistoryPeriodsProps> = props => {
 		}
 	}
 
-	// useEffect(() => {
-	// 	setTimeout(() => setPeriod({ from: 2000, to: 2050 }), 2000)
-	// 	return () => {}
-	// }, [])
-
 	return (
 		<div className='history-periods'>
 			<h1 className='history-periods__title title-h1'>
 				Исторические
 				<br /> даты
 			</h1>
-			<div className='history-periods__center'>
-				<YearsHistoryPeriods period={currentPeriod} />
-
-				<div className='history-periods__circle'>
-					<CircleHistoryPeriods
-						items={circleItems}
-						idActiveItem={currentId}
-						setActiveIndex={setCurrentIndex}
-					/>
-				</div>
-			</div>
-
 			<div className='history-periods__container container'>
+				<div className='history-periods__center'>
+					<YearsHistoryPeriods period={currentPeriod} />
+
+					<div className='history-periods__circle'>
+						<CircleHistoryPeriods
+							items={circleItems}
+							idActiveItem={currentId}
+							setActiveIndex={setCurrentIndex}
+						/>
+					</div>
+				</div>
+
 				<SwitchSlide
 					className='history-periods__switch'
 					currentPage={currentIndex + 1}

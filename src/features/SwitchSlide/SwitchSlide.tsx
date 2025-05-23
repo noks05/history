@@ -38,18 +38,24 @@ export const SwitchSlide: FC<ISwitchSlideProps> = ({
 
 			<div className='switch-slide__bottom'>
 				<DefaultButton
-					className={clsx(reachStart && 'switch-slide--hidden')}
+					className={clsx(
+						'switch-slide__button',
+						reachStart && 'switch-slide--hidden'
+					)}
 					onClick={onPrev}
 					circle
 				>
-					<IconPrev />
+					<IconPrev strokeWidth={4} />
 				</DefaultButton>
 				<DefaultButton
-					className={clsx(reachEnd && 'switch-slide--hidden')}
+					className={clsx(
+						'switch-slide__button',
+						reachEnd && 'switch-slide--hidden'
+					)}
 					onClick={onNext}
 					circle
 				>
-					<IconNext />
+					<IconNext strokeWidth={4} />
 				</DefaultButton>
 			</div>
 		</div>

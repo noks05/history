@@ -1,11 +1,10 @@
-import type { FC } from 'react'
+import type { FC, SVGProps } from 'react'
 import React from 'react'
 
-interface IIconNextProps {
-	className?: string
-}
-
-export const IconNext: FC<IIconNextProps> = ({ className }) => {
+export const IconNext: FC<SVGProps<SVGPathElement>> = ({
+	className,
+	strokeWidth = 2,
+}) => {
 	return (
 		<svg
 			className={className}
@@ -18,7 +17,7 @@ export const IconNext: FC<IIconNextProps> = ({ className }) => {
 			<path
 				d='M1.50012 0.750001L7.75012 7L1.50012 13.25'
 				stroke='currentColor'
-				stroke-width='2'
+				stroke-width={strokeWidth}
 			/>
 		</svg>
 	)

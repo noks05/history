@@ -2,10 +2,11 @@ import clsx from 'clsx'
 import type { FC } from 'react'
 import React, { useRef, useState } from 'react'
 
-import { Navigation } from 'swiper/modules'
+import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 import 'swiper/scss'
 import 'swiper/scss/navigation'
+import 'swiper/scss/pagination'
 
 import { IconNext } from '../../../../shared/images/IconNext'
 import { IconPrev } from '../../../../shared/images/IconPrev'
@@ -24,7 +25,6 @@ export const SliderHistoryPeriods: FC<ISliderHistoryPeriodsProps> = ({
 	slidesPerView = 3,
 	data,
 }) => {
-	console.log('data = ', data)
 	const [disableNav, setDisableNav] = useState('prev')
 	const swiperRef = useRef<SwiperClass>(null)
 	const onPrev = () => {
@@ -39,9 +39,18 @@ export const SliderHistoryPeriods: FC<ISliderHistoryPeriodsProps> = ({
 			<div className='slider-history__wrapper'>
 				<Swiper
 					grabCursor={true}
+					pagination={{ clickable: true }}
 					slidesPerView={slidesPerView}
 					spaceBetween={20}
-					modules={[Navigation]}
+					modules={[Navigation, Pagination]}
+					breakpoints={{
+						0: { slidesPerView: 1.5 },
+						480: { slidesPerView: 2, pagination: { clickable: true } },
+						576: {
+							slidesPerView: slidesPerView,
+							pagination: false,
+						},
+					}}
 					onBeforeInit={swiper => {
 						swiperRef.current = swiper
 					}}

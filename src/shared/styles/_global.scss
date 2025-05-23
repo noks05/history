@@ -12,6 +12,7 @@
 
 body {
 	width: 100%;
+	min-width: 320px;
 	max-width: calc($app-container-width + $app-container-padding-x * 2);
 	padding-inline: $app-container-padding-x;
 	margin-inline: auto;
@@ -68,4 +69,10 @@ body {
 
 .visibility-hidden {
 	visibility: hidden;
+}
+
+@media (max-width: 767px) {
+	body {
+		padding-inline: 0;
+	}
 }
