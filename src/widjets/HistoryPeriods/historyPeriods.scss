@@ -2,11 +2,11 @@
 
 .history-periods {
 	position: relative;
-	min-height: 100vh;
 	max-height: 1080px;
 	padding-top: min(7vh, 170px);
 	padding-bottom: min(9.6vh, 104px);
 	border-inline: 1px solid $blue-black-02;
+	overflow: hidden;
 
 	&__title {
 		position: relative;
@@ -38,6 +38,28 @@
 		left: 50%;
 		height: clamp(400px, 50vh, 530px);
 		transform: translate(-50%, -50%);
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: -100vw;
+			right: -100vw;
+			transform: translateY(50%);
+			height: 1px;
+			background-color: $blue-black-02;
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			left: 50%;
+			top: -100vw;
+			bottom: -100vw;
+			transform: translateX(50%);
+			width: 1px;
+			background-color: $blue-black-02;
+		}
 	}
 
 	&__switch {
@@ -71,5 +93,4 @@
 			order: 1;
 		}
 	}
-
 }

@@ -8,44 +8,41 @@ interface ICircleHistoryPeriodsProps {
 	className?: string
 	items: { title: string; id: number }[]
 	idActiveItem: number
-	setActiveIndex: (index: number) => void
+	setActiveItem: (index: number) => void
 }
 
 export const CircleHistoryPeriods: FC<ICircleHistoryPeriodsProps> = ({
 	className,
 	items,
-	setActiveIndex,
+	setActiveItem,
 	idActiveItem,
 }) => {
 	const parentRef = useRef<HTMLDivElement>(null)
-	const oldPosActiveChild = useRef<number | null>(null)
 	const [radius, setRadius] = useState<number | null>(null)
-	const [shift, setShift] = useState(0)
+	const [activeIndex, setActiveIndex] = useState(0)
 
 	const isRadius = typeof radius === 'number'
 
 	const childCount = items.length
+	const angleStep = 360 / childCount
 	const childOffset = 28
-	const radianInOneAngle = (2 * Math.PI) / childCount
+	const rotation = -(activeIndex * angleStep + 45)
 
-	const calcAngleInRadian = (index: number) => {
-		const angle = radianInOneAngle * index - Math.PI / 4 + shift
-		return angle
-	}
-	const getPositionOnCircle = (angle: number) => {
+	const getPositionChild = (angleShift: number) => {
 		let x = 0
 		let y = 0
 		if (!isRadius) return { x, y }
 
 		const center = radius
-		x = center + radius * Math.cos(angle) - childOffset
-		y = center + radius * Math.sin(angle) - childOffset
+		x = center + radius * Math.cos((angleShift * Math.PI) / 180) - childOffset
+		y = center + radius * Math.sin((angleShift * Math.PI) / 180) - childOffset
+
 		return { x, y }
 	}
 
-	const changeActiveChild = (index: number, shiftNumber: number) => {
+	const changeActiveIndex = (index: number) => {
+		setActiveItem(index)
 		setActiveIndex(index)
-		setShift(shiftNumber)
 	}
 
 	useEffect(() => {
@@ -56,41 +53,41 @@ export const CircleHistoryPeriods: FC<ICircleHistoryPeriodsProps> = ({
 		return () => {}
 	}, [])
 
-	// useEffect(() => {
-	// 	if (isMounted.current) {
-	// 		setShift(shift)
-	// 	}
-	// 	isMounted.current = true
-	// 	return () => {}
-	// }, [shift])
-
 	return (
-		<div className={clsx(className, 'circle-history')} ref={parentRef}>
+		<div
+			className={clsx(className, 'circle-history')}
+			ref={parentRef}
+			style={{
+				transformOrigin: '50% 50%',
+				transform: `rotate(${rotation}deg)`,
+			}}
+		>
 			{isRadius &&
 				items.map(({ id, title }, i) => {
-					const angle = calcAngleInRadian(i)
-					if (i === 0) oldPosActiveChild.current = angle
-					// console.log('item = ', i)
-					// console.log('radian = ', angle)
-
-					const diffInElems = childCount - i
-					const diffInRadian = radianInOneAngle * diffInElems
-					const { x, y } = getPositionOnCircle(angle)
+					const { x, y } = getPositionChild(i * angleStep)
 
 					return (
-						<DefaultButton
-							className={clsx(
-								'circle-history__button',
-								idActiveItem === id && 'circle-history__button--active'
-							)}
-							onClick={() => changeActiveChild(i, diffInRadian)}
-							circle
-							key={id}
-							style={{ left: `${x}px`, top: `${y}px` }}
+						<div
+							className='circle-history__button-wrapper'
+							style={{
+								left: `${x}px`,
+								top: `${y}px`,
+								transform: `rotate(${-rotation}deg)`,
+							}}
 						>
-							{i + 1}
-							<span className='circle-history__title'>{title}</span>
-						</DefaultButton>
+							<DefaultButton
+								className={clsx(
+									'circle-history__button',
+									idActiveItem === id && 'circle-history__button--active'
+								)}
+								onClick={() => changeActiveIndex(i)}
+								circle
+								key={id}
+							>
+								{i + 1}
+								<span className='circle-history__title'>{title}</span>
+							</DefaultButton>
+						</div>
 					)
 				})}
 		</div>

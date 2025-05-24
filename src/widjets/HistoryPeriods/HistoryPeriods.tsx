@@ -12,15 +12,11 @@ interface IHistoryPeriodsProps {
 	className?: string
 }
 
-type TCitcleItem = { id: number; title: string }
-
 const ALL_PAGES = 6
-console.log('circleItemsWithItems =', circleItems)
 
 export const HistoryPeriods: FC<IHistoryPeriodsProps> = props => {
 	const [currentIndex, setCurrentIndex] = useState(0)
 	const currentPeriod = circleItems[currentIndex].period
-	console.log('period', currentIndex, circleItems, currentPeriod)
 	const currentSliderItems = circleItems[currentIndex].items
 	const currentId = circleItems[currentIndex].id
 
@@ -50,7 +46,7 @@ export const HistoryPeriods: FC<IHistoryPeriodsProps> = props => {
 						<CircleHistoryPeriods
 							items={circleItems}
 							idActiveItem={currentId}
-							setActiveIndex={setCurrentIndex}
+							setActiveItem={setCurrentIndex}
 						/>
 					</div>
 				</div>
