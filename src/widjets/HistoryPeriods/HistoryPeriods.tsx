@@ -1,6 +1,7 @@
 import { SwitchSlide } from '@/features/SwitchSlide'
+import gsap from 'gsap'
 import type { FC } from 'react'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { SliderHistoryPeriods } from './parts/SliderHistoryPeriods/SliderHistoryPeriods'
 
 import './historyPeriods.scss'
@@ -16,9 +17,9 @@ const ALL_PAGES = 6
 
 export const HistoryPeriods: FC<IHistoryPeriodsProps> = props => {
 	const [currentIndex, setCurrentIndex] = useState(0)
+	const currentTitle = circleItems[currentIndex].title
 	const currentPeriod = circleItems[currentIndex].period
 	const currentSliderItems = circleItems[currentIndex].items
-	const currentId = circleItems[currentIndex].id
 
 	const onPrev = () => {
 		if (currentIndex > 0) {
@@ -31,6 +32,32 @@ export const HistoryPeriods: FC<IHistoryPeriodsProps> = props => {
 			setCurrentIndex(prev => (prev += 1))
 		}
 	}
+
+	const [isAnimating, setIsAnimating] = useState(false)
+	const blockRef = useRef(null)
+
+	useEffect(() => {
+		if (isAnimating) return
+		setIsAnimating(true)
+
+		gsap.to(blockRef.current, {
+			duration: 0.5,
+			opacity: 0,
+			onComplete: () => {
+				gsap.fromTo(
+					blockRef.current,
+					{ y: 30, opacity: 0 },
+					{
+						duration: 0.5,
+						y: 0,
+						opacity: 1,
+						onComplete: () => setIsAnimating(false),
+					}
+				)
+			},
+		})
+		return () => {}
+	}, [currentIndex])
 
 	return (
 		<div className='history-periods'>
@@ -45,8 +72,8 @@ export const HistoryPeriods: FC<IHistoryPeriodsProps> = props => {
 					<div className='history-periods__circle'>
 						<CircleHistoryPeriods
 							items={circleItems}
-							idActiveItem={currentId}
-							setActiveItem={setCurrentIndex}
+							activeIndex={currentIndex}
+							setActiveIndex={setCurrentIndex}
 						/>
 					</div>
 				</div>
@@ -58,7 +85,11 @@ export const HistoryPeriods: FC<IHistoryPeriodsProps> = props => {
 					onPrev={onPrev}
 					onNext={onNext}
 				/>
-				<SliderHistoryPeriods data={currentSliderItems} />
+
+				<div className='history-periods__slider-wrapper' ref={blockRef}>
+					<h2 className='history-periods__mobile-subtitle'>{currentTitle}</h2>
+					<SliderHistoryPeriods data={currentSliderItems} />
+				</div>
 			</div>
 		</div>
 	)

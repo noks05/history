@@ -17,12 +17,14 @@ import './sliderHistoryPeriods.scss'
 interface ISliderHistoryPeriodsProps {
 	className?: string
 	slidesPerView?: number
+	speedChangeSlide?: number
 	data: { title: string; description: string; id: number }[]
 }
 
 export const SliderHistoryPeriods: FC<ISliderHistoryPeriodsProps> = ({
 	className,
 	slidesPerView = 3,
+	speedChangeSlide = 500,
 	data,
 }) => {
 	const [disableNav, setDisableNav] = useState('prev')
@@ -38,6 +40,7 @@ export const SliderHistoryPeriods: FC<ISliderHistoryPeriodsProps> = ({
 			<h2 className='visually-hidden'>Слайдер по историческим периодам</h2>
 			<div className='slider-history__wrapper'>
 				<Swiper
+					speed={speedChangeSlide}
 					grabCursor={true}
 					pagination={{ clickable: true }}
 					slidesPerView={slidesPerView}
@@ -68,8 +71,8 @@ export const SliderHistoryPeriods: FC<ISliderHistoryPeriodsProps> = ({
 					{data.map(({ id, description, title }) => (
 						<SwiperSlide className='slider-history__slide' key={id}>
 							<div className='slider-history__box'>
-								<p className='slider-history__title'>{title}</p>
-								<h3 className='slider-history__description'>{description}</h3>
+								<h3 className='slider-history__title'>{title}</h3>
+								<p className='slider-history__description'>{description}</p>
 							</div>
 						</SwiperSlide>
 					))}

@@ -7,19 +7,18 @@ import './circleHistoryPeriods.scss'
 interface ICircleHistoryPeriodsProps {
 	className?: string
 	items: { title: string; id: number }[]
-	idActiveItem: number
-	setActiveItem: (index: number) => void
+	activeIndex: number
+	setActiveIndex: (index: number) => void
 }
 
 export const CircleHistoryPeriods: FC<ICircleHistoryPeriodsProps> = ({
 	className,
 	items,
-	setActiveItem,
-	idActiveItem,
+	activeIndex,
+	setActiveIndex,
 }) => {
 	const parentRef = useRef<HTMLDivElement>(null)
 	const [radius, setRadius] = useState<number | null>(null)
-	const [activeIndex, setActiveIndex] = useState(0)
 
 	const isRadius = typeof radius === 'number'
 
@@ -38,11 +37,6 @@ export const CircleHistoryPeriods: FC<ICircleHistoryPeriodsProps> = ({
 		y = center + radius * Math.sin((angleShift * Math.PI) / 180) - childOffset
 
 		return { x, y }
-	}
-
-	const changeActiveIndex = (index: number) => {
-		setActiveItem(index)
-		setActiveIndex(index)
 	}
 
 	useEffect(() => {
@@ -72,15 +66,15 @@ export const CircleHistoryPeriods: FC<ICircleHistoryPeriodsProps> = ({
 							style={{
 								left: `${x}px`,
 								top: `${y}px`,
-								transform: `rotate(${-rotation}deg)`,
+								transform: `rotate(${true ? -rotation : ''}deg)`,
 							}}
 						>
 							<DefaultButton
 								className={clsx(
 									'circle-history__button',
-									idActiveItem === id && 'circle-history__button--active'
+									activeIndex === i && 'circle-history__button--active'
 								)}
-								onClick={() => changeActiveIndex(i)}
+								onClick={() => setActiveIndex(i)}
 								circle
 								key={id}
 							>
